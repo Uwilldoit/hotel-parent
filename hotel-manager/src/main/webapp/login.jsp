@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>后台管理-登陆</title>
+    <title>酒店后台管理-登陆</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -56,7 +56,7 @@
 <div class="main-body">
     <div class="login-main">
         <div class="login-top">
-            <span>LayuiMini后台登录</span>
+            <span>酒店管理系统</span>
             <span class="bg1"></span>
             <span class="bg2"></span>
         </div>
@@ -81,7 +81,8 @@
             </div>
             <div class="tip">
                 <span class="icon-nocheck"></span>
-                <span class="login-tip">保持登录</span>
+                <span class="login-tip">记住我</span>
+                <input type="checkbox" name="remember-me" value="true" lay-skin="primary">
                 <a href="javascript:" class="forget-password">忘记密码？</a>
             </div>
             <div class="layui-form-item" style="text-align:center; width:100%;height:100%;margin:0px;">
@@ -139,6 +140,19 @@
             });
             return false;
         });
+
+        //退出操作
+        $('.login-out').on("click",function () {
+            //提示用户是否退出
+            layer.confirm("你确定要退出系统吗？",{icon:3,title:"提示"},function (index) {
+                //发送退出请求
+                location.href="/user/logout";
+                //关闭提示
+                layer.close(index);
+            })
+        })
+
+
     });
 </script>
 </body>
