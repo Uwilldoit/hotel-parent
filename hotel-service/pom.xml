@@ -11,9 +11,13 @@
 
     <artifactId>hotel-service</artifactId>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
+    <dependencies>
+<!--        数据层依赖-->
+        <dependency>
+            <groupId>com.wang</groupId>
+            <artifactId>hotel-dao</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

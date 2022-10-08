@@ -1,8 +1,9 @@
-package com.wang;
+package com.wang.entity;
 
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class SysUser {
@@ -22,4 +23,7 @@ public class SysUser {
     private Integer modifyBy;//修改人
     private Date modifyDate;//修改日期
     private String remark;//备注
+
+    //一个用户有多个角色
+    private List<Role> roleList;
 }

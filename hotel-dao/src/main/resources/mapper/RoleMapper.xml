@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wang.dao.RoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.wang.entity.Role">
+        <id column="id" property="id"/>
+        <result column="roleCode" property="roleCode"/>
+        <result column="roleName" property="roleName"/>
+        <result column="roleDesc" property="roleDesc"/>
+    </resultMap>
+
+<!--    根据用户ID查询用户-->
+    <select id="findRoleListByUserId" resultMap="BaseResultMap">
+            select * from sys_role where id in (select rid from sys_user_role where uid=#{UserId})
+            </select>
+</mapper>
