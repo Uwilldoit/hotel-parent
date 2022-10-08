@@ -25,12 +25,12 @@ public class SysUserServiceImpl implements SysUserService {
         List<SimpleGrantedAuthority>authorities=new ArrayList<SimpleGrantedAuthority>();
         //根据用户姓名查询用户信息的方法
         SysUser sysUser=userMapper.fidUserByUserName(username);
-        //循环遍历用户角色列表
+        //循环遍历用户角色列表 iter
         for (Role role : sysUser.getRoleList()){
             //将角色编码添加到角色列表集合中
             authorities.add(new SimpleGrantedAuthority(role.getRoleCode()));
         }
-        //创建User对象
+        //创建User对象 spring security
         User user = new User(sysUser.getUserName(),
                 sysUser.getPassword(),
                 sysUser.getStatus()==1,

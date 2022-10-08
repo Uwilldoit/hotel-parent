@@ -32,16 +32,14 @@ http://www.springframework.org/schema/security/spring-security.xsd">
 
         <!-- 防止点击劫持攻击 -->
         <!-- 启用后，将X-Frame-Options标头添加到响应中，这使较新的浏览器可以进行一些安全检查并防止点击劫持攻击 -->
-        <security:headers>
-            <security:frame-options policy="SAMEORIGIN"/>
-        </security:headers>
-
-
-
-        <!--403异常处理-->
-        <security:access-denied-handler error-page="/403.jsp"/>
     </security:http>
+    <!-- 注入密码加密类 -->
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
-
-
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref="sysUserServiceImpl">
+            <!-- 注入密码加密类 -->
+            <security:password-encoder ref="passwordEncoder"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
 </beans>

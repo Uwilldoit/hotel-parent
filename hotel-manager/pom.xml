@@ -13,11 +13,13 @@
     <packaging>war</packaging>
 
 <dependencies>
-<!--    业务层依赖-->
+<!--    service层依赖-->
     <dependency>
         <groupId>com.wang</groupId>
         <artifactId>hotel-service</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
+
+
 </dependencies>
 </project>
