@@ -32,7 +32,15 @@ http://www.springframework.org/schema/security/spring-security.xsd">
 
         <!-- 防止点击劫持攻击 -->
         <!-- 启用后，将X-Frame-Options标头添加到响应中，这使较新的浏览器可以进行一些安全检查并防止点击劫持攻击 -->
+        <security:headers>
+            <security:frame-options policy="SAMEORIGIN"/>
+        </security:headers>
+        <!-- 开启remember me过滤器 -->
+        <security:remember-me data-source-ref="dataSource"
+                              token-validity-seconds="60"
+                              remember-me-parameter="remember-me"/>
     </security:http>
+
     <!-- 注入密码加密类 -->
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
