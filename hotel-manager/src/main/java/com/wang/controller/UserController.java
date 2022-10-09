@@ -23,6 +23,6 @@ public class UserController {
     public String logout(HttpSession session){
         session.invalidate();//清空session数据
         //重定向到登陆页面
-        return "redirect:/";
+        return "redirect:/";//根目录
     }
 }

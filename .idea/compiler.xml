@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="hotel-dao" />
+        <module name="hotel-utils" />
         <module name="hotel-entity" />
         <module name="hotel-manager" />
         <module name="hotel-service" />

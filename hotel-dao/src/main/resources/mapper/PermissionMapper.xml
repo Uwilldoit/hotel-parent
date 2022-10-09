@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wang.dao.PermissionMapper">
+
+    <resultMap id="BaseResultMap" type="com.wang.entity.Permission">
+        <id property="id" column="id"/>
+        <result property="pid" column="pid"/>
+        <result property="type" column="type"/>
+        <result property="title" column="title"/>
+        <result property="permissionCode" column="permissionCode"/>
+        <result property="icon" column="icon"/>
+        <result property="href" column="href"/>
+        <result property="spread" column="spread"/>
+        <result property="target" column="target"/>
+    </resultMap>
+
+    <select id="findPermissionList" resultMap="BaseResultMap">
+        select * from sys_permission
+        <where>
+            <if test="type!=null and type!=''">
+                type =#{type }
+            </if>
+        </where>
+    </select>
+
+</mapper>
