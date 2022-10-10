@@ -11,7 +11,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/layui/lib/layui-v2.5.5/css/layui.css" media="all">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/layui/lib/layui-v2.6.3/css/layui.css" media="all">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/layui/css/public.css" media="all">
 </head>
 <body>
@@ -95,7 +95,7 @@
 
     </div>
 </div>
-<script src="${pageContext.request.contextPath}/statics/layui/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+<script src="${pageContext.request.contextPath}/statics/layui/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script>
 
 
@@ -128,7 +128,133 @@
             page: true,
         });
 
+        //监听模糊查询
+        form.on("submit(data-search-btn)",function (data) {
+            tableIns.reload({
+                where:data.field,//查询条件
+                page:{
+                    curr:1
+                }
+            });
 
+
+            return false;
+        })
+
+
+        //监听表格头部工具栏事件
+        table.on("toolbar(currentTableFilter)",function (obj) {
+            switch (obj.event) {
+                case 'add':
+                    openAddWindow();
+                    break;
+            }
+        });
+
+        //监听表格行工具栏事件
+        table.on("tool(currentTableFilter)",function (obj) {
+            switch (obj.event) {
+                case 'edit':
+                    openUpdateWindow(obj.data);
+                    break;
+                case 'delete':
+                    deleteById(obj.data);
+                    break;
+            }
+        });
+
+        //定义变量，分别保存提交地址和窗口索引
+        var url,mainIndex;
+
+        /**
+         * 打开添加窗口
+         */
+        function openAddWindow() {
+            mainIndex = layer.open({
+                type:1,
+                title:"添加部门",
+                area: ["800px", "400px"],//窗口宽高
+                content: $("#addOrUpdateWindow"),//引用的内容窗口
+                success:function () {
+                    //提交地址
+                    url = "/admin/dept/addDept";
+                    //清空表单数据
+                    $("#dataFrm")[0].reset();
+                }
+            });
+        }
+
+        /**
+         * 打开修改窗口
+         */
+        function openUpdateWindow(data) {
+            mainIndex = layer.open({
+                type:1,
+                title:"修改部门",
+                area: ["800px", "400px"],//窗口宽高
+                content: $("#addOrUpdateWindow"),//引用的内容窗口
+                success:function () {
+                    //提交地址
+                    url = "/admin/dept/updateDept";
+                    //表单数据回显
+                    form.val("dataFrm",data);
+                }
+            });
+        }
+
+        //监听表单提交事件
+        form.on("submit(doSubmit)",function (data) {
+            //发送请求
+            $.post(url,data.field,function(result){
+                if(result.success){
+                    //提示
+                    layer.alert(result.message,{icon:1});
+                    //刷新当前数据表格
+                    tableIns.reload();
+                    //关闭当前窗口
+                    layer.close(mainIndex);
+                }else{
+                    //提示
+                    layer.alert(result.message,{icon:2});
+                }
+            },"json");
+            return false;
+        });
+
+        /**
+         * 删除部门
+         * @param data
+         */
+        function deleteById(data) {
+            //发送请求查询该部门下是否存在用户信息
+            $.get("/admin/dept/checkDeptHasUser",{"deptId":data.id},function(result){
+                if(result.exist){
+                    layer.alert(result.message,{icon:0});
+                }else{
+                    //提示用户是否确认删除
+                    layer.confirm("确定要删除该部门吗?",{icon:3,title:"提示"},function (index) {
+                        //发送删除的请求
+                        $.post("/admin/dept/deleteById",{"id":data.id},function(result){
+                            if(result.success){
+                                //提示
+                                layer.alert(result.message,{icon:1});
+                                //刷新当前数据表格
+                                tableIns.reload();
+                            }else{
+                                //提示
+                                layer.alert(result.message,{icon:2});
+                            }
+                        },"json");
+
+                        layer.close(index);
+                    });
+
+
+                }
+
+
+            },"json");
+        }
 
     });
 </script>

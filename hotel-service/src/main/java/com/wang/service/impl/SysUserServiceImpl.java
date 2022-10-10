@@ -40,4 +40,8 @@ public class SysUserServiceImpl implements SysUserService {
                 authorities);
         return user;
     }
+
+    public int getUserCountByDeptId(Integer deptId) {
+        return userMapper.getUserCountByDeptId(deptId);
+    }
 }

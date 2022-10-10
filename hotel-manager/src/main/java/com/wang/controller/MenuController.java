@@ -47,7 +47,7 @@ public class MenuController {
             menuNode.setIcon(permission.getIcon());//菜单图标
             menuNode.setSpread(permission.getSpread());//是否展开
             menuNode.setTarget(permission.getTarget());//打开方式
-            //将MenuNode对象添加刀集合中
+            //将MenuNode对象添加到集合中
             menuNodeList.add(menuNode);
 
         }
