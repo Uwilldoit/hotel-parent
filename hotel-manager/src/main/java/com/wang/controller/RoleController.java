@@ -62,6 +62,23 @@ public class RoleController {
     }
 
     /**
+     * 修改角色
+     * @param role
+     * @return
+     */
+    @RequestMapping("/updateRole")
+    public String updateRole(Role role){
+        Map<String,Object>map = new HashMap<String, Object>();
+        if (roleService.insert(role)>0){
+            map.put(SystemConstants.SUCCESS,true);
+            map.put(SystemConstants.MESSAGE,"修改成功");
+        }else{
+            map.put(SystemConstants.SUCCESS,false);
+            map.put(SystemConstants.MESSAGE,"修改失败");
+        }
+        return JSON.toJSONString(map);
+    }
+    /**
      * 检查部门是否存在用户
      * @param roleId
      * @return

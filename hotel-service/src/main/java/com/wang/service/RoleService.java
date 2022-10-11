@@ -20,6 +20,12 @@ public interface RoleService {
      */
     int insert(Role record);
 
+    /**
+     * 修改角色
+     * @param role
+     * @return
+     */
+    int updateRole(Role role);
 
     /**
      * 删除角色

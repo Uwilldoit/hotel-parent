@@ -33,7 +33,7 @@ public interface SysUserMapper {
     int getUserCountByRoleId(Integer roleId);
 
     /**
-     * 查询用户列表
+     *
      * @param userVo
      * @return
      */
