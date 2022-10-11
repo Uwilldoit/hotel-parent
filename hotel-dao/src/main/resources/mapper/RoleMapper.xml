@@ -5,14 +5,55 @@
 <mapper namespace="com.wang.dao.RoleMapper">
 
     <resultMap id="BaseResultMap" type="com.wang.entity.Role">
-        <id column="id" property="id"/>
-        <result column="roleCode" property="roleCode"/>
-        <result column="roleName" property="roleName"/>
-        <result column="roleDesc" property="roleDesc"/>
+        <id column="id" property="id" />
+        <result column="roleCode" property="roleCode" />
+        <result column="roleName" property="roleName" />
+        <result column="roleDesc" property="roleDesc" />
     </resultMap>
 
-<!--    根据用户ID查询用户-->
+
+    <update id="updateRole">
+        update sys_role
+        <set>
+            <if test="roleCode != null">
+                roleCode = #{roleCode,jdbcType=VARCHAR},
+            </if>
+            <if test="roleName != null">
+                roleName = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleDesc != null">
+                roleDesc = #{roleDesc,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+
+    <delete id="deleteById">
+        delete from sys_role where id = #{id}
+    </delete>
+
+    <!-- 根据用户ID查询用户角色列表 -->
     <select id="findRoleListByUserId" resultMap="BaseResultMap">
-            select * from sys_role where id in (select rid from sys_user_role where uid=#{UserId})
-            </select>
+        select * from sys_role where id in (select rid from sys_user_role where uid=#{userId})
+    </select>
+
+
+    <select id="findRoleList" resultType="com.wang.entity.Role">
+        select * from sys_role
+        <where>
+            <if test="roleName!=null and roleName!=''">
+                and roleName like concat('%',#{roleName},'%')
+            </if>
+        </where>
+    </select>
+
+
+    <insert id="insert">
+        insert into sys_role (id, roleCode, roleName,
+                              roleDesc)
+        values (#{id,jdbcType=INTEGER}, #{roleCode,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR},
+                #{roleDesc,jdbcType=VARCHAR})
+    </insert>
+
 </mapper>

@@ -26,4 +26,7 @@ public class SysUser {
 
     //一个用户有多个角色
     private List<Role> roleList;
+
+    //一对一
+    private Dept dept;
 }

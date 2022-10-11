@@ -1,25 +1,17 @@
-package com.wang.dao;
+package com.wang.service;
 
-import com.wang.entity.Dept;
 import com.wang.entity.Role;
 import com.wang.vo.RoleVo;
 
 import java.util.List;
 
-public interface RoleMapper {
-    /**
-     * 根据用户ID查询角色列表
-     * @param userId
-     * @return
-     */
-    List<Role> findRoleListByUserId(Integer userId);
-
+public interface RoleService {
     /**
      * 查询角色列表
      * @param roleVo
      * @return
      */
-    List<Role>findRoleList(RoleVo roleVo);
+    List<Role> findRoleList(RoleVo roleVo);
 
     /**
      * 添加角色
@@ -27,6 +19,7 @@ public interface RoleMapper {
      * @return
      */
     int insert(Role record);
+
 
     /**
      * 删除角色

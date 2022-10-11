@@ -16,7 +16,22 @@ public class PageController {
         return "dept/deptManager";
     }
 
+    /**
+     * 去到角色管理页面
+     * @return
+     */
+    @RequestMapping("/toRoleManager.html")
+    public String toRoleManager(){
+        return "role/roleManager";
+    }
 
-
+    /**
+     * 去到用户管理页面
+     * @return
+     */
+    @RequestMapping("/toUserManager.html")
+    public String toUserManager(){
+        return "user/userManager";
+    }
 
 }

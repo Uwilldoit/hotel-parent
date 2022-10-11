@@ -4,6 +4,7 @@ import com.wang.dao.SysUserMapper;
 import com.wang.entity.Role;
 import com.wang.entity.SysUser;
 import com.wang.service.SysUserService;
+import com.wang.vo.UserVo;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -43,5 +44,13 @@ public class SysUserServiceImpl implements SysUserService {
 
     public int getUserCountByDeptId(Integer deptId) {
         return userMapper.getUserCountByDeptId(deptId);
+    }
+
+    public int getUserCountByRoleId(Integer roleId) {
+        return userMapper.getUserCountByRoleId(roleId);
+    }
+
+    public List<SysUser> findUserList(UserVo userVo) {
+        return userMapper.findUserList(userVo);
     }
 }
