@@ -74,4 +74,17 @@
         </where>
     </select>
 
+    <insert id="insert" parameterType="com.wang.entity.SysUser">
+        insert into sys_user (id, userName, password,
+                              realName, sex, deptId,
+                              status, email, phone,
+                              userType, hireDate, createdBy,
+                              createDate, remark)
+        values (  #{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+                 #{realName,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, #{deptId,jdbcType=INTEGER},
+                 #{status,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+                 #{userType,jdbcType=INTEGER}, #{hireDate,jdbcType=TIMESTAMP}, #{createdBy,jdbcType=INTEGER},
+                 #{createDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+    </insert>
+
 </mapper>

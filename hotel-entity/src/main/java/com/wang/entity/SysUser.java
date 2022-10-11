@@ -1,6 +1,7 @@
 package com.wang.entity;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -17,6 +18,8 @@ public class SysUser {
     private String email;//邮箱
     private String phone;//电话
     private Integer userType;//用户类型 1超级管理员  2普通用户
+
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date hireDate;//入职日期
     private Integer createdBy;//创建人
     private Date createDate;//创建日期
