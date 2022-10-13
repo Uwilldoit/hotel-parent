@@ -35,4 +35,11 @@ public interface SysUserService extends UserDetailsService {
      * @return
      */
     int insert(SysUser sysUser);
+
+    /**
+     * 更新用户
+     * @param sysUser
+     * @return
+     */
+    int updateUser(SysUser sysUser);
 }
