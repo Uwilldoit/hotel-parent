@@ -82,5 +82,57 @@ public class PermissionController {
         }
         return JSON.toJSONString(map);
     }
+    /**
+     * 修改菜单
+     * @param permission
+     * @return
+     */
+    @RequestMapping("/updatePermission")
+    public String updatePermission(Permission permission){
+        Map<String,Object> map = new HashMap<String,Object>();
+        if(permissionService.update(permission)>0){
+            map.put(SystemConstants.SUCCESS,true);
+            map.put(SystemConstants.MESSAGE,"修改成功");
+        }else{
+            map.put(SystemConstants.SUCCESS,false);
+            map.put(SystemConstants.MESSAGE,"修改失败");
+        }
+        return JSON.toJSONString(map);
+    }
+    /**
+     * 检查当前菜单下是否有子菜单
+     * @param id
+     * @return
+     */
+    @RequestMapping("/checkPermission")
+    public String checkPermission(Integer id){
+        Map<String,Object> map = new HashMap<String,Object>();
+        if(permissionService.getPermissionCountById(id)>0){
+            map.put(SystemConstants.EXIST,true);
+            map.put(SystemConstants.MESSAGE,"该菜单下存在子菜单，无法删除");
+        }else{
+            map.put(SystemConstants.EXIST,false);
+        }
+
+        return JSON.toJSONString(map);
+    }
+
+    /**
+     * 删除菜单
+     * @param id
+     * @return
+     */
+    @RequestMapping("/deleteById")
+    public String deleteById(Integer id){
+        Map<String,Object> map = new HashMap<String,Object>();
+        if(permissionService.deleteById(id)>0){
+            map.put(SystemConstants.SUCCESS,true);
+            map.put(SystemConstants.MESSAGE,"删除成功");
+        }else{
+            map.put(SystemConstants.SUCCESS,false);
+            map.put(SystemConstants.MESSAGE,"删除失败");
+        }
+        return JSON.toJSONString(map);
+    }
 
 }
