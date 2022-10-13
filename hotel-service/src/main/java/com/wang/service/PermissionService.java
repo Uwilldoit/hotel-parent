@@ -19,4 +19,25 @@ public interface PermissionService {
      * @return
      */
     int insert(Permission record);
+
+    /**
+     * 修改菜单
+     * @param record
+     * @return
+     */
+    int update(Permission record);
+
+    /**
+     * 检查菜单下是否有子菜单
+     * @param id
+     * @return
+     */
+    int getPermissionCountById(Integer id);
+
+    /**
+     * 删除菜单
+     * @param id
+     * @return
+     */
+    int deleteById(Integer id);
 }

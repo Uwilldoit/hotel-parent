@@ -36,4 +36,15 @@ public class PermissionServiceImpl implements PermissionService {
         return permissionMapper.insert(permission);
     }
 
+    public int update(Permission record) {
+        return permissionMapper.update(record);
+    }
+
+    public int getPermissionCountById(Integer id) {
+        return permissionMapper.getPermissionCountById(id);
+    }
+    public int deleteById(Integer id) {
+        return permissionMapper.deleteById(id);
+    }
+
 }
