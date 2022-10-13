@@ -63,4 +63,9 @@ public class SysUserServiceImpl implements SysUserService {
         sysUser.setPassword(new BCryptPasswordEncoder().encode(SystemConstants.DEFAULT_PASSWORD));
         return userMapper.insert(sysUser);
     }
+
+    public int updateUser(SysUser sysUser) {
+        sysUser.setModifyDate(new Date());
+        return userMapper.updateUser(sysUser);
+    }
 }

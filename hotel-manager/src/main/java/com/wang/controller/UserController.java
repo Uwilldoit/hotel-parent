@@ -83,4 +83,25 @@ public class UserController {
         }
         return JSON.toJSONString(map);
     }
+
+    /**
+     * 修改用户
+     * @param sysUser
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/updateUser")
+    public String updateUser(SysUser sysUser, HttpServletRequest request){
+        Map<String,Object> map = new HashMap<String, Object>();
+        //修改人
+        sysUser.setModifyBy(1);
+        if(sysUserService.updateUser(sysUser)>0){
+            map.put(SystemConstants.SUCCESS,true);
+            map.put(SystemConstants.MESSAGE,"修改成功");
+        }else{
+            map.put(SystemConstants.SUCCESS,false);
+            map.put(SystemConstants.MESSAGE,"修改失败");
+        }
+        return JSON.toJSONString(map);
+    }
 }
