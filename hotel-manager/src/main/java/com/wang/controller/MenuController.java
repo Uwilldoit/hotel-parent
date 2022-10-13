@@ -3,6 +3,7 @@ package com.wang.controller;
 import com.alibaba.fastjson.JSON;
 import com.wang.entity.Permission;
 import com.wang.service.PermissionService;
+import com.wang.service.SysUserService;
 import com.wang.utils.MenuNode;
 import com.wang.utils.TreeUtil;
 import com.wang.vo.PermissionVo;
@@ -20,7 +21,14 @@ import java.util.Map;
 public class MenuController {
     @Resource
     private PermissionService permissionService;
+    @Resource
+    private SysUserService sysUserService;
 
+    /**
+     * 加载首页左侧菜单导航列表
+     * @param permissionVo
+     * @return
+     */
     @RequestMapping("loadIndexMenuLeft")
     public String loadIndexMenuLeft(PermissionVo permissionVo){
         //创建Map集合，保存MenuInfo菜单信息 //有序
@@ -29,7 +37,6 @@ public class MenuController {
         Map<String,Object>homeInfo = new LinkedHashMap<String, Object>();
         //创建Map集合，保存logoInfo菜单信息
         Map<String,Object>logoInfo = new LinkedHashMap<String, Object>();
-
         //设置只查询菜单
         permissionVo.setType("menu");
         //调用查询菜单列表的方法

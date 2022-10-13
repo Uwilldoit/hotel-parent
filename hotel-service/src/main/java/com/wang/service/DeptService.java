@@ -34,4 +34,10 @@ public interface DeptService {
      * @return
      */
     int deleteById(Integer id);
+
+    /**
+     * 查询部门数据并缓存
+     * @return
+     */
+    String findDeptList();
 }

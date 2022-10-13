@@ -114,4 +114,14 @@ public class DeptController {
         }
         return JSON.toJSONString(map);
     }
+
+    /**
+     * 查找部门
+     *
+     * @return
+     */
+    @RequestMapping("/findDeptList")
+    private String findDeptList(){
+        return deptService.findDeptList();
+    }
 }

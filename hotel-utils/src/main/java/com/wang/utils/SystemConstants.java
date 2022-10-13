@@ -14,4 +14,9 @@ public interface SystemConstants {
      * 是否存在
      */
     String EXIST = "exist";
+
+    /**
+     * 默认密码
+     */
+    String  DEFAULT_PASSWORD = "123456";
 }

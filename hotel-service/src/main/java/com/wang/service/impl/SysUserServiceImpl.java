@@ -4,16 +4,19 @@ import com.wang.dao.SysUserMapper;
 import com.wang.entity.Role;
 import com.wang.entity.SysUser;
 import com.wang.service.SysUserService;
+import com.wang.utils.SystemConstants;
 import com.wang.vo.UserVo;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 @Service
 @Transactional
@@ -52,5 +55,12 @@ public class SysUserServiceImpl implements SysUserService {
 
     public List<SysUser> findUserList(UserVo userVo) {
         return userMapper.findUserList(userVo);
+    }
+
+    public int insert(SysUser sysUser) {
+        sysUser.setCreateDate(new Date());//创建时间
+        //使用默认密码并加密
+        sysUser.setPassword(new BCryptPasswordEncoder().encode(SystemConstants.DEFAULT_PASSWORD));
+        return userMapper.insert(sysUser);
     }
 }

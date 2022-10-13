@@ -28,4 +28,11 @@ public interface SysUserService extends UserDetailsService {
      * @return
      */
     List<SysUser> findUserList(UserVo userVo);
+
+    /**
+     * 添加用户
+     * @param sysUser
+     * @return
+     */
+    int insert(SysUser sysUser);
 }
