@@ -33,7 +33,7 @@ public interface RoleMapper {
      * @param role
      * @return
      */
-    int updateRole (Role role);
+    int updateRole(Role role);
 
     /**
      * 删除角色
@@ -41,4 +41,6 @@ public interface RoleMapper {
      * @return
      */
     int deleteById(Integer id);
+
+
 }

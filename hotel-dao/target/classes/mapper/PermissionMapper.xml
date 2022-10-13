@@ -69,4 +69,16 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <select id="findPermissionByRoleId" resultType="java.lang.Integer">
+    select pid from sys_role_permission where rid = #{roleId}
+    </select>
+
+    <select id="findPermissionById" resultType="com.wang.entity.Permission">
+        select * from sys_permission where id in
+        <foreach collection="list" item="roleId" open="(" separator=","
+                 close=")">
+            #{roleId}
+        </foreach>
+    </select>
 </mapper>

@@ -28,11 +28,11 @@ public class RoleServiceImpl implements RoleService {
         return roleMapper.insert(record);
     }
 
-    public int updateRole(Role role) {
-        return roleMapper.updateRole(role);
-    }
-
     public int deleteById(Integer id) {
         return roleMapper.deleteById(id);
+    }
+
+    public int updateRole(Role role) {
+        return roleMapper.updateRole(role);
     }
 }

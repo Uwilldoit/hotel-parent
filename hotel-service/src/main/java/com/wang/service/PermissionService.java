@@ -40,4 +40,18 @@ public interface PermissionService {
      * @return
      */
     int deleteById(Integer id);
+
+    /**
+     * 根据角色ID查询该角色拥有的权限菜单ID集合
+     * @param id
+     * @return
+     */
+    List<Integer>findPermissionByRoleId(Integer id);
+
+    /**
+     * 根据菜单编号菜单详细信息
+     * @param currentRolePermissions
+     * @return
+     */
+    List<Permission> findPermissionById(List<Integer> currentRolePermissions);
 }
