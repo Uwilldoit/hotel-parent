@@ -12,4 +12,11 @@ public interface PermissionMapper {
      * @return
      */
     List<Permission>findPermissionList(PermissionVo permissionVo);
+
+    /**
+     * 添加菜单
+     * @param record
+     * @return
+     */
+    int insert(Permission record);
 }

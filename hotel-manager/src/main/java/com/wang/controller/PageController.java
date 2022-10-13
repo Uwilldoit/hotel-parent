@@ -34,4 +34,14 @@ public class PageController {
         return "user/userManager";
     }
 
+    /**
+     * 去到权限管理页面
+     * @return
+     */
+    @RequestMapping("/toPermissionManager.html")
+    public String toPermissionManager(){
+
+        return "permission/permissionManager";
+    }
+
 }

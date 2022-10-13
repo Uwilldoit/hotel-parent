@@ -12,4 +12,11 @@ public interface PermissionService {
      * @return
      */
     List<Permission> findPermissionList(PermissionVo permissionVo);
+
+    /**
+     * 添加菜单
+     * @param record
+     * @return
+     */
+    int insert(Permission record);
 }

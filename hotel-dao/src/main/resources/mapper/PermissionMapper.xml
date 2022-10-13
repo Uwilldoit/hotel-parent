@@ -22,7 +22,21 @@
             <if test="type!=null and type!=''">
                 type =#{type }
             </if>
+            <if test="id!=null">
+                and id = #{id} or pid = #{id}
+            </if>
         </where>
     </select>
+
+    <insert id="insert" parameterType="com.wang.entity.Permission">
+        insert into sys_permission (pid, type,
+                                    title, permissionCode, icon,
+                                    href, spread, target
+        )
+        values (#{pid,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR},
+                #{title,jdbcType=VARCHAR}, #{permissionCode,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR},
+                #{href,jdbcType=VARCHAR}, #{spread,jdbcType=INTEGER}, #{target,jdbcType=VARCHAR}
+               )
+    </insert>
 
 </mapper>
