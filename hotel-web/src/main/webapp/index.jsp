@@ -65,8 +65,8 @@
             <div class="product-list">
                 <dl id="getIndexRoomType">
                     <dt style="background-color: #009688"><a href="lists.html" target="_blank">房间分类</a></dt>
-                  <dd data-id="1"><a class="fly-case-active" href="JavaScript:void(0);" data-type="toRoomTypeList">单人间</a></dd>
-              <dd data-id="2"><a class="fly-case-active" href="JavaScript:void(0);" data-type="toRoomTypeList">双人间</a></dd>
+<%--                    <dd data-id="1"><a class="fly-case-active" href="JavaScript:void(0);" data-type="toRoomTypeList">单人间</a></dd>--%>
+<%--                    <dd data-id="2"><a class="fly-case-active" href="JavaScript:void(0);" data-type="toRoomTypeList">双人间</a></dd>--%>
                 </dl>
             </div>
         </div>
