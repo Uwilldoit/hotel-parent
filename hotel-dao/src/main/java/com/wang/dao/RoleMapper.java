@@ -3,6 +3,8 @@ package com.wang.dao;
 import com.wang.entity.Dept;
 import com.wang.entity.Role;
 import com.wang.vo.RoleVo;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -58,4 +60,20 @@ public interface RoleMapper {
      */
     @Select("select rid from sys_user_role where uid = #{userId}")
     List<Integer> findRoleListWithUserId(Integer userId);
+
+    /**
+     * 删除角色菜单关系
+     * @param roleId
+     */
+    @Select("delete from sys_role_permission where rid = #{roleId}")
+    void deleteRolePermissionByRoleId(Integer roleId);
+
+    /**
+     * 保存角色菜单关系
+     * @param permissionId
+     * @param roleId
+     * @return
+     */
+    @Insert("insert into sys_role_permission(rid,pid) values(#{roleId},#{pid})")
+    int saveRolePermission(@Param("pid") Integer permissionId, @Param("roleId") Integer roleId);
 }

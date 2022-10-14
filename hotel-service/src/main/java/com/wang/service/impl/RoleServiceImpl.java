@@ -46,4 +46,23 @@ public class RoleServiceImpl implements RoleService {
         return roleMapper.findRoleListWithUserId(userId);
     }
 
+    public boolean saveRolePermission(String permissionIds, Integer roleId) {
+        try {
+            //删除原有的角色菜单关系
+            roleMapper.deleteRolePermissionByRoleId(roleId);
+            //将权限菜单字符串拆分成数组
+            String[] ids = permissionIds.split(",");
+            int count = 0;
+            //循环添加角色菜单关系
+            for (int i = 0; i < ids.length; i++) {
+                count =  roleMapper.saveRolePermission(Integer.valueOf(ids[i]),roleId);
+            }
+            return true;
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }
+

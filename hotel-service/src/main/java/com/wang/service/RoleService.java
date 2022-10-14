@@ -50,4 +50,12 @@ public interface RoleService {
      */
 
     List<Integer> findRoleListWithUserId(Integer userId);
+
+    /**
+     * 保存角色菜单关系
+     * @param permissionIds
+     * @param roleId
+     * @return
+     */
+    boolean saveRolePermission(String permissionIds, Integer roleId);
 }

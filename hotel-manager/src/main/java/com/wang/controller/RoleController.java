@@ -13,6 +13,7 @@ import com.wang.utils.SystemConstants;
 import com.wang.utils.TreeNode;
 import com.wang.vo.RoleVo;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -153,5 +154,24 @@ public class RoleController {
             treeNodes.add(new TreeNode(permission.getId(),permission.getPid(),permission.getTitle(),spread,checkArr));
         }
         return new DataGridViewResult(treeNodes);
+    }
+
+    /**
+     * 保存角色菜单关系
+     * @param permissionIds
+     * @param roleId
+     * @return
+     */
+    @RequestMapping("/saveRolePermission")
+    public String saveRolePermission(String permissionIds,Integer roleId){
+        Map<String,Object> map = new HashMap<String,Object>();
+        if(roleService.saveRolePermission(permissionIds,roleId)){
+            map.put(SystemConstants.SUCCESS,true);
+            map.put(SystemConstants.MESSAGE,"菜单分配成功");
+        }else{
+            map.put(SystemConstants.SUCCESS,false);
+            map.put(SystemConstants.MESSAGE,"菜单分配失败");
+        }
+        return JSON.toJSONString(map);
     }
 }
