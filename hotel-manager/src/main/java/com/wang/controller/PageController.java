@@ -44,4 +44,20 @@ public class PageController {
         return "permission/permissionManager";
     }
 
+    /**
+     * 去到楼层管理页面
+     * @return
+     */
+    @RequestMapping("/toFloorManager.html")
+    public String toFloorManager(){
+        return "floor/floorManager";
+    }
+
+    /**
+     * 去到房型管理页面
+     */
+    @RequestMapping("/toRoomTypeManager.html")
+    public String toRoomTypeManager(){
+        return "roomType/roomTypeManager";
+    }
 }

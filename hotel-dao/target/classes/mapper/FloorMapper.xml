@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wang.dao.FloorMapper">
+
+    <resultMap id="BaseResultMap" type="com.wang.entity.Floor">
+        <result column="id" property="id"/>
+        <result column="floorName" property="floorName"/>
+        <result column="remark" property="remark"/>
+    </resultMap>
+
+    <select id="findFloorList" resultMap="BaseResultMap">
+        select * from t_floor
+        <where>
+            <if test="floorName!=null and floorName!=''">
+                and floorName like  concat('%',#{floorName},'%')
+            </if>
+        </where>
+        order by id
+    </select>
+
+    <insert id="insert">
+        insert into t_floor(floorName,remark)values (#{floorName},#{remark})
+    </insert>
+
+
+    <update id="updateFloor">
+        update t_floor
+        <set>
+            <if test="floorName != null">
+                floorName = #{floorName,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+
+
+</mapper>
