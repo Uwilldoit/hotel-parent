@@ -14,7 +14,7 @@ public interface SysUserMapper {
      * @param userName
      * @return
      */
-    SysUser fidUserByUserName(String userName);
+    SysUser findUserByUserName(String userName);
 
     /**
      * 根据部门编号查询该部门下的员工信息
@@ -68,4 +68,12 @@ public interface SysUserMapper {
      */
     @Delete("delete from sys_user where id = #{id}")
     int deleteById(Integer id);
+
+    /**
+     * 根据用户名查询用户信息
+     * @param userName
+     * @return
+     */
+    @Select("select * from sys_user where userName = #{userName}")
+    SysUser getUserByUserName(String userName);
 }

@@ -2,6 +2,7 @@ package com.wang.service;
 
 import com.wang.entity.Permission;
 import com.wang.vo.PermissionVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -54,4 +55,10 @@ public interface PermissionService {
      * @return
      */
     List<Permission> findPermissionById(List<Integer> currentRolePermissions);
+
+    /**根据当前登陆用户查询菜单列表
+     * @param userId
+     * @return
+     */
+    List<Permission>findPermissionListByUserId( Integer userId,String type);
 }

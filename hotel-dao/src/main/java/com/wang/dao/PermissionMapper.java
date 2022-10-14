@@ -3,6 +3,7 @@ package com.wang.dao;
 import com.wang.entity.Permission;
 import com.wang.vo.PermissionVo;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -59,4 +60,10 @@ public interface PermissionMapper {
      * @return
      */
     List<Permission> findPermissionById(List<Integer> currentRolePermissions);
+
+    /**
+     * @param userId
+     * @return
+     */
+    List<Permission>findPermissionListByUserId(@Param("userId") Integer userId, @Param("type") String type);
 }

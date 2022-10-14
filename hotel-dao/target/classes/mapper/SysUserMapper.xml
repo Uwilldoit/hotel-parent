@@ -39,7 +39,7 @@
         </association>
     </resultMap>
 <!--   根据用户名查询用户信息的方法-->
-    <select id="fidUserByUserName" resultMap="userRoleResultMap">
+    <select id="findUserByUserName" resultMap="userRoleResultMap">
         select *
         from sys_user where userName = #{userName};
     </select>

@@ -56,4 +56,11 @@ public interface SysUserService extends UserDetailsService {
      * @return
      */
     int resetPwd(Integer id);
+
+    /**
+     * 根据用户名查询用户信息
+     * @param userName
+     * @return
+     */
+    SysUser getUserByUserName(String userName);
 }

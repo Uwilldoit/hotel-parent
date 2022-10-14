@@ -28,7 +28,7 @@ public class SysUserServiceImpl implements SysUserService {
         //创建角色列表集合
         List<SimpleGrantedAuthority>authorities=new ArrayList<SimpleGrantedAuthority>();
         //根据用户姓名查询用户信息的方法
-        SysUser sysUser=userMapper.fidUserByUserName(username);
+        SysUser sysUser=userMapper.findUserByUserName(username);
         //循环遍历用户角色列表 iter
         for (Role role : sysUser.getRoleList()){
             //将角色编码添加到角色列表集合中
@@ -83,5 +83,9 @@ public class SysUserServiceImpl implements SysUserService {
         sysUser.setPassword(PasswordUtil.encode(SystemConstants.DEFAULT_PASSWORD));
         sysUser.setModifyDate(new Date());
         return userMapper.updateUser(sysUser);
+    }
+
+    public SysUser getUserByUserName(String userName) {
+        return userMapper.getUserByUserName(userName);
     }
 }
