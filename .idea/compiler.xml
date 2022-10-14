@@ -12,6 +12,7 @@
         <module name="hotel-entity" />
         <module name="hotel-manager" />
         <module name="hotel-service" />
+        <module name="hotel-web" />
       </profile>
     </annotationProcessing>
   </component>

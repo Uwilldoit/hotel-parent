@@ -42,4 +42,18 @@ public interface SysUserService extends UserDetailsService {
      * @return
      */
     int updateUser(SysUser sysUser);
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+    int deleteById(Integer id);
+
+    /**
+     * 重置密码
+     * @param id
+     * @return
+     */
+    int resetPwd(Integer id);
 }

@@ -68,8 +68,8 @@ public class RoleController {
      */
     @RequestMapping("/updateRole")
     public String updateRole(Role role){
-        Map<String,Object>map = new HashMap<String, Object>();
-        if (roleService.insert(role)>0){
+        Map<String,Object> map = new HashMap<String,Object>();
+        if(roleService.updateRole(role)>0){
             map.put(SystemConstants.SUCCESS,true);
             map.put(SystemConstants.MESSAGE,"修改成功");
         }else{
@@ -96,7 +96,7 @@ public class RoleController {
     }
     /**
      * 删除角色
-     * @param
+     * @param id
      * @return
      */
     @RequestMapping("/deleteById")

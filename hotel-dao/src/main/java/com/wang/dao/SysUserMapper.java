@@ -2,6 +2,7 @@ package com.wang.dao;
 
 import com.wang.entity.SysUser;
 import com.wang.vo.UserVo;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -53,5 +54,18 @@ public interface SysUserMapper {
      */
     int updateUser(SysUser sysUser);
 
+    /**
+     * 删除用户角色关系表数据
+     * @param id
+     */
+    @Delete("delete from sys_user_role where uid = #{id}")
+    void deleteUserRoleByUserId(Integer id);
 
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+    @Delete("delete from sys_user where id = #{id}")
+    int deleteById(Integer id);
 }

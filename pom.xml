@@ -15,6 +15,8 @@
         <module>hotel-entity</module>
         <module>hotel-manager</module>
         <module>hotel-utils</module>
+        <module>hotel-web</module>
+        <module>hotel-web</module>
 
 
     </modules>

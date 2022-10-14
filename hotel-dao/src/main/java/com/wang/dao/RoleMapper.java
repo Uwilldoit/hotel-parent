@@ -3,8 +3,10 @@ package com.wang.dao;
 import com.wang.entity.Dept;
 import com.wang.entity.Role;
 import com.wang.vo.RoleVo;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 public interface RoleMapper {
     /**
@@ -41,4 +43,19 @@ public interface RoleMapper {
      * @return
      */
     int deleteById(Integer id);
+
+    /**
+     * 查询所有角色
+     * @return
+     */
+    @Select("select * from sys_role ")
+    List<Map<String,Object>> findRoleListByMap();
+
+    /**
+     * 根据用户ID查询该用户拥有的角色列表(只查询角色ID)
+     * @param userId
+     * @return
+     */
+    @Select("select rid from sys_user_role where uid = #{userId}")
+    List<Integer> findRoleListWithUserId(Integer userId);
 }
