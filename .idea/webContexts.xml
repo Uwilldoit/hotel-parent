@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/hotel-manager/src/main/webapp/WEB-INF/view/dept/deptManager.jsp" value="file://$PROJECT_DIR$/hotel-manager/src/main/webapp/WEB-INF/view/dept" />
         <entry key="file://$PROJECT_DIR$/hotel-manager/src/main/webapp/login.jsp" value="file://$PROJECT_DIR$/hotel-manager/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/hotel-web/src/main/webapp/index.jsp" value="file://$PROJECT_DIR$/hotel-web/src/main/webapp" />
       </map>
     </option>
   </component>

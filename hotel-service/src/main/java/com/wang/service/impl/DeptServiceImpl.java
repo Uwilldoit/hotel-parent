@@ -44,7 +44,14 @@ public class DeptServiceImpl implements DeptService {
      */
     public int insert(Dept record) {
         record.setCreateDate(new Date());
-        return deptMapper.insert(record);
+        //调用删除方法
+        int count = deptMapper.insert(record);
+        //如果添加成功
+        if(count>0){
+            //清空缓存
+            JedisPoolUtils.getJedis().del(RedisKey.DEPT_LIST);
+        }
+            return count;
     }
 
     /**
@@ -53,11 +60,23 @@ public class DeptServiceImpl implements DeptService {
      * @return
      */
     public int updateDept(Dept dept) {
-        return deptMapper.updateDept(dept);
+        int count = deptMapper.updateDept(dept);
+
+        if(count>0){
+            //清空缓存
+            JedisPoolUtils.getJedis().del(RedisKey.DEPT_LIST);
+        }
+        return count;
     }
 
     public int deleteById(Integer id) {
-        return deptMapper.deleteById(id);
+        int count = deptMapper.deleteById(id);
+        //如果添加成功
+        if(count>0){
+            //清空缓存
+            JedisPoolUtils.getJedis().del(RedisKey.DEPT_LIST);
+        }
+        return count;
     }
 
     public String findDeptList() {

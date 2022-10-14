@@ -4,6 +4,7 @@ import com.wang.dao.SysUserMapper;
 import com.wang.entity.Role;
 import com.wang.entity.SysUser;
 import com.wang.service.SysUserService;
+import com.wang.utils.PasswordUtil;
 import com.wang.utils.SystemConstants;
 import com.wang.vo.UserVo;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -60,7 +61,28 @@ public class SysUserServiceImpl implements SysUserService {
     public int insert(SysUser sysUser) {
         sysUser.setCreateDate(new Date());//创建时间
         //使用默认密码并加密
-        sysUser.setPassword(new BCryptPasswordEncoder().encode(SystemConstants.DEFAULT_PASSWORD));
+        sysUser.setPassword(PasswordUtil.encode(SystemConstants.DEFAULT_PASSWORD));
         return userMapper.insert(sysUser);
+    }
+
+    public int updateUser(SysUser sysUser) {
+        sysUser.setModifyDate(new Date());
+        return userMapper.updateUser(sysUser);
+    }
+
+    public int deleteById(Integer id) {
+        //删除用户角色表的数据
+        userMapper.deleteUserRoleByUserId(id);
+        //删除用户数据
+        return userMapper.deleteById(id);
+    }
+
+    public int resetPwd(Integer id) {
+        //创建用户对象
+        SysUser sysUser = new SysUser();
+        sysUser.setId(id);//用户ID
+        sysUser.setPassword(PasswordUtil.encode(SystemConstants.DEFAULT_PASSWORD));
+        sysUser.setModifyDate(new Date());
+        return userMapper.updateUser(sysUser);
     }
 }

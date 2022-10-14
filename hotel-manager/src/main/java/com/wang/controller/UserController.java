@@ -83,4 +83,63 @@ public class UserController {
         }
         return JSON.toJSONString(map);
     }
+
+    /**
+     * 修改用户
+     * @param sysUser
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/updateUser")
+    public String updateUser(SysUser sysUser, HttpServletRequest request){
+        Map<String,Object> map = new HashMap<String, Object>();
+        //修改人
+        sysUser.setModifyBy(1);
+        if(sysUserService.updateUser(sysUser)>0){
+            map.put(SystemConstants.SUCCESS,true);
+            map.put(SystemConstants.MESSAGE,"修改成功");
+        }else{
+            map.put(SystemConstants.SUCCESS,false);
+            map.put(SystemConstants.MESSAGE,"修改失败");
+        }
+        return JSON.toJSONString(map);
+    }
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/deleteById")
+    public String deleteById(Integer id){
+        Map<String,Object> map = new HashMap<String, Object>();
+        if(sysUserService.deleteById(id)>0){
+            map.put(SystemConstants.SUCCESS,true);
+            map.put(SystemConstants.MESSAGE,"删除成功");
+        }else{
+            map.put(SystemConstants.SUCCESS,false);
+            map.put(SystemConstants.MESSAGE,"删除失败");
+        }
+        return JSON.toJSONString(map);
+    }
+
+    /**
+     * 重置密码
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/resetPwd")
+    public String resetPwd(Integer id){
+        Map<String,Object> map = new HashMap<String, Object>();
+        if(sysUserService.resetPwd(id)>0){
+            map.put(SystemConstants.SUCCESS,true);
+            map.put(SystemConstants.MESSAGE,"密码重置成功");
+        }else{
+            map.put(SystemConstants.SUCCESS,false);
+            map.put(SystemConstants.MESSAGE,"密码重置失败");
+        }
+        return JSON.toJSONString(map);
+    }
 }

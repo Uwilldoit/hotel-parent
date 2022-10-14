@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
+
 @Service
 @Transactional
 public class RoleServiceImpl implements RoleService {
@@ -28,11 +30,20 @@ public class RoleServiceImpl implements RoleService {
         return roleMapper.insert(record);
     }
 
+    public int updateRole(Role role) {
+        return roleMapper.updateRole(role);
+    }
+
     public int deleteById(Integer id) {
         return roleMapper.deleteById(id);
     }
 
-    public int updateRole(Role role) {
-        return roleMapper.updateRole(role);
+    public List<Map<String, Object>> findRoleListByMap() {
+        return roleMapper.findRoleListByMap();
     }
+
+    public List<Integer> findRoleListWithUserId(Integer userId) {
+        return roleMapper.findRoleListWithUserId(userId);
+    }
+
 }
