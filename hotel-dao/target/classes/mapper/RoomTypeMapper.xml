@@ -40,4 +40,12 @@
                 #{livedNum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
                )
     </insert>
+    
+    <select id="getRoomCountByRoomTypeId" resultType="int">
+        select count(1) from t_room where roomTypeId = #{roomTypeId}
+    </select>
+
+    <delete id="deleteById">
+        delete from t_room_type where id=#{id}
+    </delete>
 </mapper>

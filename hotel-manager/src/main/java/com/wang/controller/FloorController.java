@@ -70,5 +70,13 @@ public class FloorController {
         return JSON.toJSONString(map);
     }
 
-
+    /**
+     *
+     * 查询楼层列表数据
+     * @return
+     */
+    @RequestMapping("/floorList")
+    public String floorList(){
+        return floorService.getFloorListByRedis();
+    }
 }

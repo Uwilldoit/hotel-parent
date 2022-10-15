@@ -3,6 +3,8 @@ package com.wang.service;
 import com.wang.entity.Permission;
 import com.wang.vo.PermissionVo;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

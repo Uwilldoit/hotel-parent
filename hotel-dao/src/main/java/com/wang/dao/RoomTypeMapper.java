@@ -20,4 +20,18 @@ public interface RoomTypeMapper {
      * @return
      */
     int insert(RoomType record);
+
+    /**
+     * 根据房型ID查询该房型下的数量
+     * @param roomTypeId
+     * @return
+     */
+    int getRoomCountByRoomTypeId(Integer roomTypeId);
+
+    /**
+     * 删除房型
+     * @param id
+     * @return
+     */
+    int deleteById(Integer id);
 }

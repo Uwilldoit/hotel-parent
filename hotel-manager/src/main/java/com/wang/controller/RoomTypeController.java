@@ -52,7 +52,7 @@ public class RoomTypeController {
         //判断是否有选中文件
         if(!attach.isEmpty()){
             //获取文件上传地址
-            String path="C:/project/hotel/upload";
+            String path="C:/project/hotel/upload/";
             //获取源文件的名称
             String oldName= attach.getOriginalFilename();
             //获取文件的后缀名
@@ -104,4 +104,47 @@ public class RoomTypeController {
         return JSON.toJSONString(map);
     }
 
+
+    /**
+     * 检查该房型下是否存在房间
+     * @param roomTypeId
+     * @return
+     */
+    @RequestMapping("/checkRoomTypeHasRoom")
+    public String checkRoomTypeHasRoom(Integer roomTypeId){
+        Map<String,Object> map = new HashMap<String,Object>();
+        if(roomTypeService.getRoomCountByRoomTypeId(roomTypeId)>0){
+            map.put(SystemConstants.EXIST,true);
+            map.put(SystemConstants.MESSAGE,"该房型下存在房间信息，无法删除");
+        }else{
+            map.put(SystemConstants.EXIST,false);
+        }
+        return JSON.toJSONString(map);
+    }
+    /**
+     * 删除房型
+     * @param id
+     * @return
+     */
+    @RequestMapping("/deleteById")
+    public String deleteById(Integer id){
+        Map<String,Object> map = new HashMap<String,Object>();
+        if(roomTypeService.deleteById(id)>0){
+            map.put(SystemConstants.SUCCESS,true);
+            map.put(SystemConstants.MESSAGE,"删除成功");
+        }else{
+            map.put(SystemConstants.SUCCESS,false);
+            map.put(SystemConstants.MESSAGE,"删除失败");
+        }
+        return JSON.toJSONString(map);
+    }
+
+    /**
+     * 查询房型列表
+     * @return
+     */
+    @RequestMapping("/roomTypeList")
+    public String roomTypeList(){
+        return roomTypeService.getRoomTypeListByRedis();
+    }
 }

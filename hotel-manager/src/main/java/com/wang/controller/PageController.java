@@ -60,4 +60,13 @@ public class PageController {
     public String toRoomTypeManager(){
         return "roomType/roomTypeManager";
     }
+
+    /**
+     * 去到房间管理页面
+     * @return
+     */
+    @RequestMapping("/toRoomManager.html")
+    public String toRoomManager(){
+        return "room/roomManager";
+    }
 }

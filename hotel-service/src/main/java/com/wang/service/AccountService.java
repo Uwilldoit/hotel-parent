@@ -1,6 +1,8 @@
 package com.wang.service;
 
 import com.wang.entity.Account;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 public interface AccountService {

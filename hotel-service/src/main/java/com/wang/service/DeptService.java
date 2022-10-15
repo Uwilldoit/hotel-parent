@@ -2,6 +2,8 @@ package com.wang.service;
 
 import com.wang.entity.Dept;
 import com.wang.vo.DeptVo;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
