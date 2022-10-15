@@ -3,6 +3,8 @@ package com.wang.dao;
 import com.wang.entity.SysUser;
 import com.wang.vo.UserVo;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -76,4 +78,15 @@ public interface SysUserMapper {
      */
     @Select("select * from sys_user where userName = #{userName}")
     SysUser getUserByUserName(String userName);
+
+
+    /**
+     * 保存用户关系
+     * @param roleId
+     * @param userId
+     */
+    @Insert("insert into sys_user_role (uid,rid) values(#{userId},#{roleId})")
+    void saveUserRole(@Param("roleId") Integer roleId,@Param("userId") Integer userId);
+
+
 }
