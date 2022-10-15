@@ -17,7 +17,7 @@
     <style>
         .thumbBox{ height:200px; overflow:hidden; border:1px solid #e6e6e6; border-radius:2px; cursor:pointer; position:relative; text-align:center; line-height:200px;width: 210px;}
         .thumbImg{ max-width:100%; max-height:100%; border:none;}
-        .thumbBox:after{ position:absolute; width:100%; height:100%;line-height:200px; z-index:-1; text-align:center; font-size:20px; content:"缩略图"; left:0; top:0; color:#9F9F9F;}
+        .thumbBox:after{ position:absolute; width:100%; height:100%;line-height:200px; z-index:-1; text-align:center; font-size:20px; content:"添加图片"; left:0; top:0; color:#9F9F9F;}
     </style>
 </head>
 <body>
@@ -103,7 +103,7 @@
                         <div class="layui-col-md3 layui-col-xs5">
                             <div class="layui-upload-list thumbBox mag0 magt3">
                                 <input type="hidden" name="photo" id="photo" value="/statics/images/defaultimg.jpg">
-                                <img class="layui-upload-img thumbImg" src="/statics/images/defaultimg.jpg">
+                                <img class="layui-upload-img thumbImg" src="/statics/images/defaultImg.jpg">
                             </div>
                         </div>
                     </div>
@@ -273,9 +273,9 @@
                     //清空表单数据
                     $("#dataFrm")[0].reset();
                     //设置隐藏域默认值
-                    $("#photo").val("images/defaulting.jpg");
+                    $("#photo").val("images/defaultImg.jpg");
                     //设置默认图片
-                    $(".thumbImg").attr("src","/hotel/show/images/defaulting.jpg");
+                    $(".thumbImg").attr("src","/hotel/show/images/defaultImg.jpg");
                 }
             });
         }

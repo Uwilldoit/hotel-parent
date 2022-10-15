@@ -13,4 +13,11 @@ public interface RoomTypeMapper {
      * @return
      */
     List<RoomType> findRoomTypeList(RoomTypeVo roomTypeVo);
+
+    /**
+     * 添加房型
+     * @param record
+     * @return
+     */
+    int insert(RoomType record);
 }

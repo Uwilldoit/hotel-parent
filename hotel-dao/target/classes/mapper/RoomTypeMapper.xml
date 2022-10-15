@@ -27,4 +27,17 @@
             </if>
         </where>
     </select>
+
+    <insert id="insert">
+        insert into t_room_type (typeName, photo,
+                                 price, liveNum, bedNum,
+                                 roomNum, reservedNum, availableNum,
+                                 livedNum, status, remark
+        )
+        values (#{typeName,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR},
+                #{price,jdbcType=DECIMAL}, #{liveNum,jdbcType=INTEGER}, #{bedNum,jdbcType=INTEGER},
+                #{roomNum,jdbcType=INTEGER}, #{reservedNum,jdbcType=INTEGER}, #{availableNum,jdbcType=INTEGER},
+                #{livedNum,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}
+               )
+    </insert>
 </mapper>

@@ -17,10 +17,21 @@ public class RoomTypeServiceImpl implements RoomTypeService {
 
     /**
      * 查询房型列表
+     *
      * @param roomTypeVo
      * @return
      */
     public List<RoomType> findRoomTypeList(RoomTypeVo roomTypeVo) {
         return roomTypeMapper.findRoomTypeList(roomTypeVo);
+    }
+
+    public int insert(RoomType roomType) {
+        //设置已预订数量
+        roomType.setReservedNum(0);
+        //设置可入住房间数量
+        roomType.setAvailableNum(roomType.getRoomNum());
+        //设置已入住房间数量
+        roomType.setLivedNum(0);
+        return roomTypeMapper.insert(roomType);
     }
 }
