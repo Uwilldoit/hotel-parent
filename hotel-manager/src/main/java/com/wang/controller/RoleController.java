@@ -121,6 +121,37 @@ public class RoleController {
         return JSON.toJSONString(map);
     }
 
+    @RequestMapping("/initRoleListByUserId")
+    public DataGridViewResult initRoleListByUserId(Integer userId){
+        //调用查询所有角色的方法
+        List<Map<String,Object>> roleListByMap = roleService.findRoleListByMap();
+        //调用根据用户ID查询用户拥有的角色列表方法
+        List<Integer> roleListWithUserId = roleService.findRoleListWithUserId(userId);
+        //循环便利两个集合的数据
+        for(Map<String,Object> map : roleListByMap){
+            //定义变量，标识是否选中
+            boolean flag = false;
+            //获取角色ID
+            Integer roleId = (Integer) map.get("id") ;
+
+            //内层循环遍历拥有的角色列表
+            for(Integer rid : roleListWithUserId){
+                if(rid == roleId){
+                    //修改状态值
+                    flag = true;
+                    break;
+                }
+            }
+            //将数据保存到Map中
+            map.put("LAY_CHECKED",flag);
+        }
+        return new DataGridViewResult(roleListByMap);
+
+    }
+
+
+
+
     @RequestMapping("/initMenuTree")
     public DataGridViewResult initMenuTree(Integer roleId){
         //调用查询所有查询菜单权限列表的方法

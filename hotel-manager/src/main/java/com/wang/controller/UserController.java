@@ -50,7 +50,13 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping("/list")
-    public DataGridViewResult list(UserVo userVo){
+    public DataGridViewResult list(UserVo userVo,Principal principal){
+        //查询当前用户
+        SysUser loginUser = sysUserService.getUserByUserName(principal.getName());
+        if(loginUser != null && loginUser.getUserType() == 2){
+            userVo.setUserType(2);
+        }
+
         //设置分页信息
         PageHelper.startPage(userVo.getPage(),userVo.getLimit());
         //调用查询部门列表的方法
@@ -69,11 +75,13 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping("/addUser")
-    public String addUser(SysUser sysUser, HttpServletRequest request){
+    public String addUser(SysUser sysUser, Principal principal){
+        //获取当前登录用户信息
+        SysUser loginUser = sysUserService.getUserByUserName(principal.getName());
         Map<String,Object> map = new HashMap<String,Object>();
 
         //创建人
-        sysUser.setCreatedBy(1);
+        sysUser.setCreatedBy(loginUser.getId());
         if(sysUserService.insert(sysUser)>0){
             map.put(SystemConstants.SUCCESS,true);
             map.put(SystemConstants.MESSAGE,"添加成功");
@@ -91,10 +99,13 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping("/updateUser")
-    public String updateUser(SysUser sysUser, HttpServletRequest request){
-        Map<String,Object> map = new HashMap<String, Object>();
+    public String updateUser(SysUser sysUser, Principal principal){
+        //获取当前登录用户信息
+        SysUser loginUser = sysUserService.getUserByUserName(principal.getName());
         //修改人
-        sysUser.setModifyBy(1);
+        sysUser.setModifyBy(loginUser.getId());
+        Map<String,Object> map = new HashMap<String, Object>();
+
         if(sysUserService.updateUser(sysUser)>0){
             map.put(SystemConstants.SUCCESS,true);
             map.put(SystemConstants.MESSAGE,"修改成功");
@@ -131,15 +142,39 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping("/resetPwd")
-    public String resetPwd(Integer id){
+    public String resetPwd(Integer id,Principal principal){
+        SysUser loginUser = sysUserService.getUserByUserName(principal.getName());
+
         Map<String,Object> map = new HashMap<String, Object>();
-        if(sysUserService.resetPwd(id)>0){
+        if(sysUserService.resetPwd(id,loginUser.getId())>0){
             map.put(SystemConstants.SUCCESS,true);
             map.put(SystemConstants.MESSAGE,"密码重置成功");
         }else{
             map.put(SystemConstants.SUCCESS,false);
             map.put(SystemConstants.MESSAGE,"密码重置失败");
         }
+        return JSON.toJSONString(map);
+    }
+
+    /**
+     * 分配角色
+     * @param ids
+     * @param userId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/grantRole")
+    public String grantRole(String ids,Integer userId){
+        Map<String,Object> map = new HashMap<String, Object>();
+
+        if(sysUserService.saveUserRole(ids,userId)){
+            map.put(SystemConstants.SUCCESS,true);
+            map.put(SystemConstants.MESSAGE,"角色分配成功");
+        }else{
+            map.put(SystemConstants.SUCCESS,false);
+            map.put(SystemConstants.MESSAGE,"角色分配失败");
+        }
+
         return JSON.toJSONString(map);
     }
 }
