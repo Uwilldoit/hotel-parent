@@ -50,4 +50,6 @@ public interface RoleService {
      */
 
     List<Integer> findRoleListWithUserId(Integer userId);
+
+
 }

@@ -3,6 +3,7 @@ package com.wang.entity;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Data
@@ -16,5 +17,6 @@ public class Account {
     private String email;
     private Integer status;
     private Date registTime;
-
+    //角色列表
+    private List<AccountRole> roleList;
 }

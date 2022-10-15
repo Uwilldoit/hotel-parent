@@ -1,9 +1,10 @@
 package com.wang.service;
 
 import com.wang.entity.Account;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 
-public interface AccountService {
+public interface AccountService extends UserDetailsService {
     /**
      * 添加用户
      * @param account
@@ -11,5 +12,17 @@ public interface AccountService {
      */
     int addAccount(Account account);
 
+    /**
+     * 根据用户名查询用户信息
+     * @param loginName
+     * @return
+     */
+    Account findAccountByName(String loginName);
 
+    /**
+     * 根据用户名查询用户信息
+     * @param loginName
+     * @return
+     */
+//    Account getAccountByName(String loginName);
 }

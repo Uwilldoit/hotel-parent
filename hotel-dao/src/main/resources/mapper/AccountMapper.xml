@@ -16,11 +16,11 @@
     </resultMap>
 
     <!-- 定义用户角色关系关联 -->
-    <resultMap id="accountRoleResultMap" type="com.wang.entity.Account" extends="BaseResultMap">
-        <!-- 一对多 -->
-        <collection property="roleList" ofType="com.wang.entity.AccountRole" column="id"
-                    select="com.wang.dao.AccountRoleMapper.findRoleListByAccountId"/>
-    </resultMap>
+   <resultMap id="accountRoleResultMap" type="com.wang.entity.Account" extends="BaseResultMap">
+       <!-- 一对多 -->
+       <collection property="roleList" ofType="com.wang.entity.AccountRole" column="id"
+                   select="com.wang.dao.AccountRoleMapper.findRoleListByAccountId"/>
+   </resultMap>
 
     <insert id="addAccount" keyProperty="id" useGeneratedKeys="true">
         insert into t_account (loginName, password,realName, idCard, phone,email, status, registTime)

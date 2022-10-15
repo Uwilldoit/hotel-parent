@@ -90,7 +90,7 @@
                             </div>
                             <div class="layui-form-item login-btn">
                                 <div class="layui-input-block">
-                                    <button class="layui-btn" style="background-color: #009688" >登录</button>
+                                    <button class="layui-btn"  style="background-color: #009688" >登录</button>
                                 </div>
                             </div>
                         </form>
@@ -136,6 +136,7 @@
             ,height: '460' //设置容器高度
             ,arrow: 'always' //始终显示箭头
         });
+
 
 
     });

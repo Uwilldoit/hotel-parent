@@ -36,10 +36,22 @@ public class AccountController {
         }
         return map;
     }
-//    public String register(Account account){
-//        if (accountService.addAccount(account)>0){
-//            return "redirect:/login.jsp";
-//        }
-//        return "redirect:/register.jsp";
-//    }
+    /**
+     * 检查用户名是否存在
+     * @param loginName
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/checkName")
+    public Map<String,Object> checkName(String loginName){
+        Map<String,Object> map = new HashMap<String,Object>();
+        if (accountService.findAccountByName(loginName)!=null){
+            map.put(SystemConstants.EXIST,true);
+            map.put(SystemConstants.MESSAGE,"用户名已存在，请重新输入");
+        }else{
+            map.put(SystemConstants.EXIST,false);
+            map.put(SystemConstants.MESSAGE,"用户名可以使用");
+        }
+        return map;
+    }
 }
