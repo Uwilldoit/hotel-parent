@@ -2,6 +2,9 @@ package com.wang.service;
 
 import com.wang.entity.Permission;
 import com.wang.vo.PermissionVo;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -40,4 +43,24 @@ public interface PermissionService {
      * @return
      */
     int deleteById(Integer id);
+
+    /**
+     * 根据角色ID查询该角色拥有的权限菜单ID集合
+     * @param id
+     * @return
+     */
+    List<Integer>findPermissionByRoleId(Integer id);
+
+    /**
+     * 根据菜单编号菜单详细信息
+     * @param currentRolePermissions
+     * @return
+     */
+    List<Permission> findPermissionById(List<Integer> currentRolePermissions);
+
+    /**根据当前登陆用户查询菜单列表
+     * @param userId
+     * @return
+     */
+    List<Permission>findPermissionListByUserId( Integer userId,String type);
 }

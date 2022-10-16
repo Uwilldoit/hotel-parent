@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wang.dao.RoomMapper">
+
+    <resultMap id="BaseResultMap" type="com.wang.entity.Room">
+        <id column="id"  property="id" />
+        <result column="title"  property="title" />
+        <result column="photo"  property="photo" />
+        <result column="roomNum"  property="roomNum" />
+        <result column="roomTypeId"  property="roomTypeId" />
+        <result column="floorId"  property="floorId" />
+        <result column="status"  property="status" />
+        <result column="roomRequirement"  property="roomRequirement" />
+        <result column="remark"  property="remark" />
+    </resultMap>
+
+<!--    配置关联关系-->
+    <resultMap id="roomResultMap" type="com.wang.entity.Room" extends="BaseResultMap">
+<!--        房型-->
+        <association property="roomType" javaType="com.wang.entity.RoomType">
+            <id column="id"  property="id" />
+            <result column="typeName" property="typeName" />
+            <result column="photo"  property="photo" />
+            <result column="price"  property="price" />
+            <result column="roomNumber" property="roomNum" />
+        </association>
+        <!-- 楼层 -->
+        <association property="floor" javaType="com.wang.entity.Floor">
+            <id column="id"  property="id" />
+            <result column="floorName"  property="floorName" />
+            <result column="remark" property="remark" />
+        </association>
+
+    </resultMap>
+
+    <select id="findRoomList" resultMap="roomResultMap">
+        select t1.*,t2.`typeName`,t2.price,t3.`floorName`,t2.roomNum as roomNumber from t_room t1
+        inner join t_room_type t2 on t2.id = t1.`roomTypeId`
+        inner join t_floor t3 on t3.id = t1.`floorId`
+        <where>
+            <if test="roomNum!=null and roomNum!=''">
+                and t1.roomNum like concat('%',#{roomNum},'%')
+            </if>
+            <if test="title!=null and title!=''">
+                and t1.title like concat('%',#{title},'%')
+            </if>
+            <if test="floorId!=null">
+                and t1.floorId = #{floorId}
+            </if>
+            <if test="roomTypeId!=null">
+                and t1.roomTypeId = #{roomTypeId}
+            </if>
+            <if test="status!=null">
+                and t1.status = #{status}
+            </if>
+        </where>
+    </select>
+
+    <insert id="addRoom">
+        insert into t_room (title, photo,
+                            roomNum, roomTypeId, floorId,
+                            status, roomRequirement, remark,
+                            roomDesc)
+        values (#{title}, #{photo},
+                #{roomNum}, #{roomTypeId}, #{floorId},
+                #{status}, #{roomRequirement}, #{remark},
+                #{roomDesc})
+    </insert>
+
+</mapper>

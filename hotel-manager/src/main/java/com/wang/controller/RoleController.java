@@ -3,16 +3,21 @@ package com.wang.controller;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.wang.entity.Permission;
 import com.wang.entity.Role;
+import com.wang.service.PermissionService;
 import com.wang.service.RoleService;
 import com.wang.service.SysUserService;
 import com.wang.utils.DataGridViewResult;
 import com.wang.utils.SystemConstants;
+import com.wang.utils.TreeNode;
 import com.wang.vo.RoleVo;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +31,8 @@ public class RoleController {
     @Resource
     private SysUserService sysUserService;
 
+    @Resource
+    private PermissionService permissionService;
     /**
      * 查询部门列表
      * @param
@@ -78,6 +85,8 @@ public class RoleController {
         }
         return JSON.toJSONString(map);
     }
+
+
     /**
      * 检查部门是否存在用户
      * @param roleId
@@ -108,6 +117,91 @@ public class RoleController {
         }else{
             map.put(SystemConstants.SUCCESS,false);
             map.put(SystemConstants.MESSAGE,"删除失败");
+        }
+        return JSON.toJSONString(map);
+    }
+
+    @RequestMapping("/initRoleListByUserId")
+    public DataGridViewResult initRoleListByUserId(Integer userId){
+        //调用查询所有角色的方法
+        List<Map<String,Object>> roleListByMap = roleService.findRoleListByMap();
+        //调用根据用户ID查询用户拥有的角色列表方法
+        List<Integer> roleListWithUserId = roleService.findRoleListWithUserId(userId);
+        //循环便利两个集合的数据
+        for(Map<String,Object> map : roleListByMap){
+            //定义变量，标识是否选中
+            boolean flag = false;
+            //获取角色ID
+            Integer roleId = (Integer) map.get("id") ;
+
+            //内层循环遍历拥有的角色列表
+            for(Integer rid : roleListWithUserId){
+                if(rid == roleId){
+                    //修改状态值
+                    flag = true;
+                    break;
+                }
+            }
+            //将数据保存到Map中
+            map.put("LAY_CHECKED",flag);
+        }
+        return new DataGridViewResult(roleListByMap);
+
+    }
+
+
+
+
+    @RequestMapping("/initMenuTree")
+    public DataGridViewResult initMenuTree(Integer roleId){
+        //调用查询所有查询菜单权限列表的方法
+        List<Permission> permissionList = permissionService.findPermissionList(null);
+        ////调用根据角色ID查询菜单列表的方法（角色权限列表集合）
+        List<Integer> currentRolePermissionIds= permissionService.findPermissionByRoleId(roleId);
+        ////创建集合保存菜单信息
+        List<Permission> currentPermissions = new ArrayList<Permission>();
+        //判断角色权限列表集合是否存在数据
+        if (currentRolePermissionIds!=null && currentRolePermissionIds.size()>0){
+            currentPermissions = permissionService.findPermissionById(currentRolePermissionIds);
+        }
+
+        //创建菜单节点集合
+        List<TreeNode>treeNodes=new ArrayList<TreeNode>();
+        //循环遍历权限菜单列表 iter
+        for (Permission permission : permissionList) {
+            //定义变量，标识是否选中
+            String checkArr = "0";//0表示复选框不选中，1表示选中复选框
+            //内层循环遍历当前角色拥有的权限菜单
+            //循环比较的原因：比较两个集合中的数据是否有相同的，有相同地表示当前角色拥有这个权限
+            for (Permission currentPermission : currentPermissions) {
+                //比较两个集合中权限菜单id是否相同，相同则选择
+                if(permission.getId() == currentPermission.getId()){
+                    checkArr = "1";
+                    break;
+                }
+            }
+            //定义变量，标识菜单是否展开
+            Boolean spread= permission.getSpread() == null || permission.getSpread() == 1;
+            treeNodes.add(new TreeNode(permission.getId(),permission.getPid(),permission.getTitle(),spread,checkArr));
+        }
+        return new DataGridViewResult(treeNodes);
+    }
+
+    /**
+     * 保存角色菜单关系
+     * @param permissionIds
+     * @param roleId
+     * @return
+     */
+    @RequestMapping("/saveRolePermission")
+    public String saveRolePermission(String permissionIds,Integer roleId){
+        Map<String,Object> map = new HashMap<String,Object>();
+        if(roleService.saveRolePermission(permissionIds,roleId)){
+            map.put(SystemConstants.SUCCESS,true);
+            map.put(SystemConstants.MESSAGE,"菜单分配成功");
+        }else{
+            map.put(SystemConstants.SUCCESS,false);
+            map.put(SystemConstants.MESSAGE,"菜单分配失败");
         }
         return JSON.toJSONString(map);
     }

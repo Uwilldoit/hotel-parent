@@ -2,6 +2,7 @@ package com.wang.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.wang.entity.Permission;
+import com.wang.entity.SysUser;
 import com.wang.service.PermissionService;
 import com.wang.service.SysUserService;
 import com.wang.utils.MenuNode;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -30,7 +32,7 @@ public class MenuController {
      * @return
      */
     @RequestMapping("loadIndexMenuLeft")
-    public String loadIndexMenuLeft(PermissionVo permissionVo){
+    public String loadIndexMenuLeft(PermissionVo permissionVo, Principal principal){
         //创建Map集合，保存MenuInfo菜单信息 //有序
         Map<String,Object>map = new LinkedHashMap<String, Object>();
         //创建Map集合，保存homeInfo菜单信息
@@ -39,8 +41,13 @@ public class MenuController {
         Map<String,Object>logoInfo = new LinkedHashMap<String, Object>();
         //设置只查询菜单
         permissionVo.setType("menu");
+        //获取当前登陆用户
+        SysUser loginUser = sysUserService.getUserByUserName(principal.getName());
+
         //调用查询菜单列表的方法
-        List<Permission>menuList = permissionService.findPermissionList(permissionVo);
+        //List<Permission>menuList = permissionService.findPermissionList(permissionVo);
+        List<Permission>menuList=permissionService.findPermissionListByUserId(loginUser.getId(),"menu");
+
         //创建集合，保存菜单关系
         List<MenuNode>menuNodeList = new ArrayList<MenuNode>();
         //循环遍历菜单集合

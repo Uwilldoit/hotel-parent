@@ -18,8 +18,6 @@ import redis.clients.jedis.Jedis;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
-
-
 @Service
 @Transactional
 public class DeptServiceImpl implements DeptService {

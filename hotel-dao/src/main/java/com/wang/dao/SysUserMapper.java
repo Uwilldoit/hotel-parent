@@ -3,6 +3,8 @@ package com.wang.dao;
 import com.wang.entity.SysUser;
 import com.wang.vo.UserVo;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -14,7 +16,7 @@ public interface SysUserMapper {
      * @param userName
      * @return
      */
-    SysUser fidUserByUserName(String userName);
+    SysUser findUserByUserName(String userName);
 
     /**
      * 根据部门编号查询该部门下的员工信息
@@ -68,4 +70,23 @@ public interface SysUserMapper {
      */
     @Delete("delete from sys_user where id = #{id}")
     int deleteById(Integer id);
+
+    /**
+     * 根据用户名查询用户信息
+     * @param userName
+     * @return
+     */
+    @Select("select * from sys_user where userName = #{userName}")
+    SysUser getUserByUserName(String userName);
+
+
+    /**
+     * 保存用户关系
+     * @param roleId
+     * @param userId
+     */
+    @Insert("insert into sys_user_role (uid,rid) values(#{userId},#{roleId})")
+    void saveUserRole(@Param("roleId") Integer roleId,@Param("userId") Integer userId);
+
+
 }

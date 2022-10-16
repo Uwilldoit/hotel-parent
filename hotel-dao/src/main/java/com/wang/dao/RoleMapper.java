@@ -62,6 +62,13 @@ public interface RoleMapper {
     List<Integer> findRoleListWithUserId(Integer userId);
 
     /**
+     * 删除角色菜单关系
+     * @param roleId
+     */
+    @Select("delete from sys_role_permission where rid = #{roleId}")
+    void deleteRolePermissionByRoleId(Integer roleId);
+
+    /**
      * 保存角色菜单关系
      * @param permissionId
      * @param roleId
@@ -69,5 +76,4 @@ public interface RoleMapper {
      */
     @Insert("insert into sys_role_permission(rid,pid) values(#{roleId},#{pid})")
     int saveRolePermission(@Param("pid") Integer permissionId, @Param("roleId") Integer roleId);
-
 }

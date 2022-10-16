@@ -3,6 +3,8 @@ package com.wang.service;
 import com.wang.entity.Role;
 import com.wang.vo.RoleVo;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -51,5 +53,11 @@ public interface RoleService {
 
     List<Integer> findRoleListWithUserId(Integer userId);
 
-
+    /**
+     * 保存角色菜单关系
+     * @param permissionIds
+     * @param roleId
+     * @return
+     */
+    boolean saveRolePermission(String permissionIds, Integer roleId);
 }

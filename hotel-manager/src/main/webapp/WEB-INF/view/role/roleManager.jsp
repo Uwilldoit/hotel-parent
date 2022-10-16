@@ -13,6 +13,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/layui/lib/layui-v2.6.3/css/layui.css"
           media="all">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/layui/css/public.css" media="all">
+    <%-- 引入dtree.css --%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/layui_ext/dtree/dtree.css">
+    <%-- 引入dtreefont.css --%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/layui_ext/dtree/font/dtreefont.css">
 </head>
 <body>
 <div class="layuimini-container">
@@ -106,11 +111,14 @@
 </div>
 <script src="${pageContext.request.contextPath}/statics/layui/lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script>
-    layui.use(['form', 'table', 'laydate', 'jquery','layer'], function () {
+    layui.extend({
+        dtree:"${pageContext.request.contextPath}/statics/layui_ext/dtree/dtree",
+    }).use(['form', 'table', 'laydate', 'jquery','layer','dtree'], function () {
         var $ = layui.jquery,
             form = layui.form,
             laydate = layui.laydate,
             layer = layui.layer,
+            dtree = layui.dtree,
             table = layui.table;
 
         //获取<meta>标签中封装的CSRF Token

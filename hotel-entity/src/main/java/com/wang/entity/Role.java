@@ -8,4 +8,6 @@ public class Role {
     private String roleCode;//角色编码
     private String roleName;//角色名称
     private String roleDesc;//角色描述
+
+
 }
