@@ -69,4 +69,42 @@
                 #{roomDesc})
     </insert>
 
+    <update id="updateRoom">
+        update t_room
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="photo != null">
+                photo = #{photo},
+            </if>
+            <if test="roomNum != null">
+                roomNum = #{roomNum},
+            </if>
+            <if test="roomTypeId != null">
+                roomTypeId = #{roomTypeId},
+            </if>
+            <if test="floorId != null">
+                floorId = #{floorId},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="roomRequirement != null">
+                roomRequirement = #{roomRequirement},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="roomDesc != null">
+                roomDesc = #{roomDesc},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        delete from t_room where id = #{id}
+    </delete>
+
 </mapper>
