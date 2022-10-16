@@ -2,9 +2,11 @@ package com.wang.service.impl;
 
 import com.wang.dao.CheckinMapper;
 import com.wang.dao.OrdersMapper;
+import com.wang.dao.RoomMapper;
 import com.wang.dao.RoomTypeMapper;
 import com.wang.entity.Checkin;
 import com.wang.entity.Orders;
+import com.wang.entity.Room;
 import com.wang.entity.RoomType;
 import com.wang.service.CheckinService;
 import com.wang.vo.CheckinVo;
@@ -25,6 +27,9 @@ public class CheckinServiceImpl implements CheckinService {
 
     @Resource
     private RoomTypeMapper roomTypeMapper;
+
+    @Resource
+    private RoomMapper roomMapper;
 
     public List<Checkin> findCheckinList(CheckinVo checkinVo) {
         return checkinMapper.findCheckinList(checkinVo);
@@ -51,6 +56,12 @@ public class CheckinServiceImpl implements CheckinService {
             roomType.setLivedNum(roomType.getLivedNum()+1);
             //调用修改房型的方法
             roomTypeMapper.updateRoomType(roomType);
+            //修改房间状态（由已预订2改成入住中3）
+            Room room = new Room();
+            room.setStatus(3);
+            room.setId(orders.getRoomId());
+            //调用修改的方法
+            roomMapper.updateRoom(room);
         }
         return count;
     }
