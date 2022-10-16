@@ -69,4 +69,30 @@ public class PageController {
     public String toRoomManager(){
         return "room/roomManager";
     }
+    /**
+     * 去到入住管理页面
+     * @return
+     */
+    @RequestMapping("/toCheckinManager.html")
+    public String toCheckinManager(){
+        return "checkin/checkinManager";
+    }
+
+    /**
+     * 去到年度营业额报表统计分析页面
+     * @return
+     */
+    @RequestMapping("/toYearTotalPriceManager.html")
+    public String toYearTotalPriceManager(){
+        return "charts/yearTotalPriceCharts";
+    }
+
+    /**
+     * 去到月营业额报表统计分析页面
+     * @return
+     */
+    @RequestMapping("/toYearOfMonthCharts.html")
+    public String toYearOfMonthCharts(){
+        return "charts/yearOfMonthCharts";
+    }
 }
