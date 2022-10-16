@@ -52,6 +52,6 @@ public class CheckinServiceImpl implements CheckinService {
             //调用修改房型的方法
             roomTypeMapper.updateRoomType(roomType);
         }
-        return 0;
+        return count;
     }
 }

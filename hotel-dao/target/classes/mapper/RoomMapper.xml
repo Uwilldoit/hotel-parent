@@ -25,7 +25,7 @@
             <result column="typeName" jdbcType="VARCHAR" property="typeName" />
             <result column="photo" jdbcType="VARCHAR" property="photo" />
             <result column="price" jdbcType="DECIMAL" property="price" />
-            <result column="roomNumber" property="roomNum" />
+            <result column="roomNumber" jdbcType="VARCHAR" property="roomNum" />
         </association>
         <!-- 楼层 -->
         <association property="floor" javaType="com.wang.entity.Floor">

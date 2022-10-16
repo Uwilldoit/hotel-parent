@@ -6,7 +6,6 @@ import com.wang.entity.Orders;
 import com.wang.service.AccountService;
 import com.wang.service.OrdersService;
 import com.wang.utils.SystemConstants;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;

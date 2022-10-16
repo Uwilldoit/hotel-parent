@@ -37,12 +37,12 @@
             <id column="id"  property="id" />
             <result column="title"  property="title" />
             <result column="photo"  property="photo" />
-            <result column="roomNum"  property="roomNum" />
+            <result column="roomNumber"  property="roomNum" />
         </association>
     </resultMap>
 
     <select id="findCheckinList" resultMap="checkinRoomResultMap">
-        select t1.*,t2.`typeName`,t3.`roomNum` from t_checkin t1
+        select t1.*,t2.`typeName`,t3.`roomNum` as roomNumber from t_checkin t1
         inner join t_room_type t2 on t2.id = t1.`roomTypeId`
         inner join t_room t3 on t3.id = t1.`roomId`
         <where>
@@ -82,4 +82,53 @@
                 #{ordersId}, #{status}, #{createDate},
                 #{createdBy}, #{remark})
     </insert>
+
+    <update id="update">
+        update t_checkin
+        <set>
+            <if test="roomTypeId != null">
+                roomTypeId = #{roomTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="roomId != null">
+                roomId = #{roomId,jdbcType=BIGINT},
+            </if>
+            <if test="customerName != null">
+                customerName = #{customerName,jdbcType=VARCHAR},
+            </if>
+            <if test="idCard != null">
+                idCard = #{idCard,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="arriveDate != null">
+                arriveDate = #{arriveDate,jdbcType=DATE},
+            </if>
+            <if test="leaveDate != null">
+                leaveDate = #{leaveDate,jdbcType=DATE},
+            </if>
+            <if test="ordersId != null">
+                ordersId = #{ordersId,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null">
+                createDate = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdBy != null">
+                createdBy = #{createdBy,jdbcType=INTEGER},
+            </if>
+            <if test="modifyDate != null">
+                modifyDate = #{modifyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyBy != null">
+                modifyBy = #{modifyBy,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>
