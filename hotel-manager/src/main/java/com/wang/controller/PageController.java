@@ -95,4 +95,13 @@ public class PageController {
     public String toYearOfMonthCharts(){
         return "charts/yearOfMonthCharts";
     }
+
+    /**
+     * 去到预订管理页面
+     * @return
+     */
+    @RequestMapping("/toOrdersManager.html")
+    public String toOrdersManager(){
+        return "orders/ordersManager";
+    }
 }
