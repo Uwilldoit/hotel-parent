@@ -152,4 +152,41 @@ public class RoomController {
         }
         return JSON.toJSONString(map);
     }
+
+    /**
+     * 修改房间
+     * @param room
+     * @return
+     */
+    @RequestMapping("/updateRoom")
+    public String updateRoom(Room room){
+        Map<String,Object> map = new HashMap<String,Object>();
+        if(roomService.updateRoom(room)>0){
+            map.put(SystemConstants.SUCCESS,true);
+            map.put(SystemConstants.MESSAGE,"修改成功");
+        }else{
+            map.put(SystemConstants.SUCCESS,false);
+            map.put(SystemConstants.MESSAGE,"修改失败");
+        }
+        return JSON.toJSONString(map);
+    }
+
+    /**
+     * 删除房间
+     * @param id
+     * @return
+     */
+    @RequestMapping("/deleteById")
+    public String deleteById(Integer id){
+        Map<String,Object> map = new HashMap<String,Object>();
+        if(roomService.deleteById(id)>0){
+            map.put(SystemConstants.SUCCESS,true);
+            map.put(SystemConstants.MESSAGE,"删除成功");
+        }else{
+            map.put(SystemConstants.SUCCESS,false);
+            map.put(SystemConstants.MESSAGE,"删除失败");
+        }
+        return JSON.toJSONString(map);
+    }
+
 }

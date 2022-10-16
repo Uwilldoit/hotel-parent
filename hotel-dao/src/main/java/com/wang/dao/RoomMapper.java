@@ -19,4 +19,18 @@ public interface RoomMapper {
      * @return
      */
     int addRoom(Room room);
+
+    /**
+     * 修改房间
+     * @param room
+     * @return
+     */
+    int updateRoom(Room room);
+
+    /**
+     * 删除房间
+     * @param id
+     * @return
+     */
+    int deleteById(Integer id);
 }

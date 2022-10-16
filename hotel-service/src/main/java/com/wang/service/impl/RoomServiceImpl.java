@@ -28,4 +28,12 @@ public class RoomServiceImpl implements RoomService {
     public int addRoom(Room room) {
         return roomMapper.addRoom(room);
     }
+
+    public int updateRoom(Room room) {
+        return roomMapper.updateRoom(room);
+    }
+
+    public int deleteById(Integer id) {
+        return roomMapper.deleteById(id);
+    }
 }
