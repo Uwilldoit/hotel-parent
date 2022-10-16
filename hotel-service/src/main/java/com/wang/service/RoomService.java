@@ -22,7 +22,6 @@ public interface RoomService {
      * @return
      */
     int addRoom(Room room);
-
     /**
      * 修改房间
      * @param room
@@ -36,4 +35,11 @@ public interface RoomService {
      * @return
      */
     int deleteById(Integer id);
+
+    /**
+     * 查询房型信息
+     * @param id
+     * @return
+     */
+    Room findById(Integer id);
 }

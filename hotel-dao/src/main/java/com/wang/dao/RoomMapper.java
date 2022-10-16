@@ -33,4 +33,13 @@ public interface RoomMapper {
      * @return
      */
     int deleteById(Integer id);
+
+    /**
+     * 查询房型信息
+     * @param id
+     * @return
+     */
+    Room findById(Integer id);
+
+
 }

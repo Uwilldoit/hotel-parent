@@ -36,4 +36,10 @@ public class RoomServiceImpl implements RoomService {
     public int deleteById(Integer id) {
         return roomMapper.deleteById(id);
     }
+
+
+
+    public Room findById(Integer id) {
+        return roomMapper.findById(id);
+    }
 }
