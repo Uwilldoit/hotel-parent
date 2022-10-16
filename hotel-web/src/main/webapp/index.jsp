@@ -152,7 +152,7 @@
                         <c:forEach var="room" items="${roomList}">
                             <c:if test="${room.floorId ==floor.id }">
                                 <div data-id="${room.id}" class="layui-col-xs6 layui-col-md3">
-                            <a class="template store-list-box fly-case-active" href="/room/detail/${room.id}.html" data-type="toRoomInfo">
+                            <a class="template store-list-box fly-case-active" href="/room/${room.id}.html" data-type="toRoomInfo">
                                 <img src="http://localhost:8080/hotel/show/room-pic/main/${room.photo}" class="store-list-cover">
                                 <h2 class="layui-elip">${room.title}</h2>
                                 <p class="price"> <span title="金额"> ￥${room.roomType.price} </span>

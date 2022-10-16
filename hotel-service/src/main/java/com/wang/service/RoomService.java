@@ -22,7 +22,6 @@ public interface RoomService {
      * @return
      */
     int addRoom(Room room);
-
     /**
      * 修改房间
      * @param room

@@ -28,7 +28,7 @@ http://www.springframework.org/schema/security/spring-security.xsd">
         <security:form-login
                 login-page="/login.jsp"
                 login-processing-url="/login"
-                default-target-url="/index.jsp"
+                default-target-url="/welcome.jsp"
                 authentication-failure-url="/login.jsp"
                 username-parameter="loginName"
                 password-parameter="password"
