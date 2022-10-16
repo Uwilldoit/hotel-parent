@@ -104,6 +104,23 @@ public class RoomTypeController {
         return JSON.toJSONString(map);
     }
 
+    /**
+     * 修改房型
+     * @param roomType
+     * @return
+     */
+    @RequestMapping("/updateRoomType")
+    public String updateRoomType(RoomType roomType){
+        Map<String,Object> map = new HashMap<String,Object>();
+        if(roomTypeService.updateRoomType(roomType)>0){
+            map.put(SystemConstants.SUCCESS,true);
+            map.put(SystemConstants.MESSAGE,"修改成功");
+        }else{
+            map.put(SystemConstants.SUCCESS,false);
+            map.put(SystemConstants.MESSAGE,"修改失败");
+        }
+        return JSON.toJSONString(map);
+    }
 
     /**
      * 检查该房型下是否存在房间
@@ -138,6 +155,7 @@ public class RoomTypeController {
         }
         return JSON.toJSONString(map);
     }
+
 
     /**
      * 查询房型列表

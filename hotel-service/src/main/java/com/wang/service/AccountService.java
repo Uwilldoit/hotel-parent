@@ -24,5 +24,5 @@ public interface AccountService extends UserDetailsService {
      * @param loginName
      * @return
      */
-//    Account getAccountByName(String loginName);
+    Account getAccountByName(String loginName);
 }

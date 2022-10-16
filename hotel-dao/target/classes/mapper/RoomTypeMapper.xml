@@ -48,4 +48,45 @@
     <delete id="deleteById">
         delete from t_room_type where id=#{id}
     </delete>
+
+    <update id="updateRoomType">
+        update t_room_type
+        <set>
+            <if test="typeName != null">
+                typeName = #{typeName},
+            </if>
+            <if test="photo != null">
+                photo = #{photo},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="liveNum != null">
+                liveNum = #{liveNum},
+            </if>
+            <if test="bedNum != null">
+                bedNum = #{bedNum},
+            </if>
+            <if test="roomNum != null">
+                roomNum = #{roomNum},
+            </if>
+            <if test="reservedNum != null">
+                reservedNum = #{reservedNum},
+            </if>
+            <if test="availableNum != null">
+                availableNum = #{availableNum},
+            </if>
+            <if test="livedNum != null">
+                livedNum = #{livedNum},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
 </mapper>

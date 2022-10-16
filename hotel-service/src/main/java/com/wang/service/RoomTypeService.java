@@ -37,8 +37,15 @@ public interface RoomTypeService {
     int deleteById(Integer id);
 
     /**
+     * 修改房型
+     */
+    int updateRoomType(RoomType roomType);
+
+    /**
      * 查询房型列表
      * @return
      */
     String getRoomTypeListByRedis();
+
+
 }

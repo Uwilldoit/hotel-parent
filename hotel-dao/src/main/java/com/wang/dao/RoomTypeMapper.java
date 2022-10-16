@@ -2,6 +2,7 @@ package com.wang.dao;
 
 import com.wang.entity.RoomType;
 import com.wang.vo.RoomTypeVo;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -34,4 +35,19 @@ public interface RoomTypeMapper {
      * @return
      */
     int deleteById(Integer id);
+
+    /**
+     * 修改房型
+     * @param roomType
+     * @return
+     */
+    int updateRoomType(RoomType roomType);
+
+    /**
+     * 根据ID查询
+     * @param roomTypeId
+     * @return
+     */
+    @Select("select * from t_room_type where id = #{id}")
+    RoomType findById(Integer roomTypeId);
 }

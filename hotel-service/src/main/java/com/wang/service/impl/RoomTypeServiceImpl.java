@@ -2,6 +2,7 @@ package com.wang.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.wang.dao.RoomTypeMapper;
+import com.wang.entity.Room;
 import com.wang.entity.RoomType;
 import com.wang.service.RoomTypeService;
 import com.wang.utils.JedisPoolUtils;
@@ -60,5 +61,13 @@ public class RoomTypeServiceImpl implements RoomTypeService {
             room_type_list=jedis.set(RedisKey.ROOM_TYPE_LIST, JSON.toJSONString(roomTypeList));
         }
         return room_type_list;
+    }
+
+    public int updateRoomType(RoomType roomType) {
+        //清空缓存
+        JedisPoolUtils.getJedis().del(RedisKey.ROOM_TYPE_LIST);
+        //修改可用房间数
+        roomType.setAvailableNum(roomType.getRoomNum());
+        return roomTypeMapper.updateRoomType(roomType);
     }
 }

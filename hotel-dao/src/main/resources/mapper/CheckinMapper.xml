@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wang.dao.CheckinMapper">
+
+    <resultMap id="BaseResultMap" type="com.wang.entity.Checkin">
+        <id column="id" property="id" />
+        <id column="payPrice"  property="payPrice" />
+        <result column="roomTypeId"  property="roomTypeId" />
+        <result column="roomId" property="roomId" />
+        <result column="customerName"  property="customerName" />
+        <result column="idCard"  property="idCard" />
+        <result column="phone"  property="phone" />
+        <result column="arriveDate"  property="arriveDate" />
+        <result column="leaveDate"  property="leaveDate" />
+        <result column="ordersId" property="ordersId" />
+        <result column="status"  property="status" />
+        <result column="createDate"  property="createDate" />
+        <result column="createdBy"  property="createdBy" />
+        <result column="modifyDate"  property="modifyDate" />
+        <result column="modifyBy"  property="modifyBy" />
+        <result column="remark"  property="remark" />
+    </resultMap>
+
+
+<!--    房型-->
+    <resultMap id="checkinRoomResultMap" type="com.wang.entity.Checkin" extends="BaseResultMap">
+        <association property="roomType" javaType="com.wang.entity.RoomType">
+            <id column="id" property="id" />
+            <result column="typeName"  property="typeName" />
+            <result column="photo"  property="photo" />
+            <result column="price" property="price" />
+        </association>
+<!--        房间-->
+        <association property="room" javaType="com.wang.entity.Room">
+            <id column="id"  property="id" />
+            <result column="title"  property="title" />
+            <result column="photo"  property="photo" />
+            <result column="roomNum"  property="roomNum" />
+        </association>
+    </resultMap>
+
+    <select id="findCheckinList" resultMap="checkinRoomResultMap">
+        select t1.*,t2.`typeName`,t3.`roomNum` from t_checkin t1
+        inner join t_room_type t2 on t2.id = t1.`roomTypeId`
+        inner join t_room t3 on t3.id = t1.`roomId`
+        <where>
+            <if test="customerName!=null and customerName!=''">
+                and t1.customerName like concat('%',#{customerName},'%')
+            </if>
+            <if test="idCard!=null and idCard!=''">
+                and t1.idCard like concat('%',#{idCard},'%')
+            </if>
+            <if test="phone!=null and phone!=''">
+                and t1.phone like concat('%',#{phone},'%')
+            </if>
+            <if test="roomTypeId!=null">
+                and t1.roomTypeId = #{roomTypeId}
+            </if>
+            <if test="status!=null">
+                and t1.status = #{status}
+            </if>
+            <if test="startDate!=null">
+                <![CDATA[ and t1.reserveDate >= #{startDate} ]]>
+            </if>
+            <if test="endDate!=null">
+                <![CDATA[ and t1.reserveDate <= #{endDate} ]]>
+            </if>
+        </where>
+    </select>
+
+    <insert id="insert">
+        insert into t_checkin (payPrice, roomTypeId,
+                               roomId, customerName, idCard,
+                               phone, arriveDate, leaveDate,
+                               ordersId, status, createDate,
+                               createdBy,remark)
+        values (#{payPrice}, #{roomTypeId},
+                #{roomId}, #{customerName}, #{idCard},
+                #{phone}, #{arriveDate}, #{leaveDate},
+                #{ordersId}, #{status}, #{createDate},
+                #{createdBy}, #{remark})
+    </insert>
+</mapper>

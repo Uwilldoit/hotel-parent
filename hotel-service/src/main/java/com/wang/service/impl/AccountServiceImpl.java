@@ -79,5 +79,7 @@ public class AccountServiceImpl implements AccountService {
         return user;
     }
 
-
+    public Account getAccountByName(String loginName) {
+        return accountMapper.getAccountByName(loginName);
+    }
 }
