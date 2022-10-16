@@ -19,12 +19,4 @@ public interface AccountMapper {
      */
     Account findAccountByName(String loginName);
 
-//    /**
-//     * 根据用户名查询用户信息
-//     * @param loginName
-//     * @return
-//     */
-//    @Select("select * from t_account where loginName = #{loginName}")
-//    Account getAccountByName(String loginName);
-
 }
